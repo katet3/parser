@@ -13,13 +13,52 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\syntax_analyzer">
+      <UniqueIdentifier>{68cb4dc8-e07a-4f80-af76-845953d8857d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\lexer_analyzer">
+      <UniqueIdentifier>{f754afb2-a7f7-49d5-9649-0cb91bf3ccab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\syntax_analyzer\Class_syntax_tree">
+      <UniqueIdentifier>{5560062b-8e1a-4971-90bd-128747240ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\syntax_analyzer\Class_AST">
+      <UniqueIdentifier>{8e0794a0-f726-41d8-a1f7-d8d925218272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\syntax_analyzer\Class_visitor">
+      <UniqueIdentifier>{027e5a04-f670-464d-98d8-cc1744ad9e1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\syntax_analyzer\Class_binary_expression">
+      <UniqueIdentifier>{7c4519c5-eedd-4553-b81c-7df9a49fe9df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\syntax_analyzer\Class_numeric_literal">
+      <UniqueIdentifier>{027eb542-b5a6-41c2-baa2-a290b1fab7b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\syntax_analyzer\Class_expression">
+      <UniqueIdentifier>{1049d096-f10f-49e8-92bb-00aa86041679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\syntax_analyzer\Class_boolean_expression">
+      <UniqueIdentifier>{2204d0e4-fb41-4bdd-8dc2-2a2c1a4037e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="syntax_analyzer.cpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\syntax_analyzer</Filter>
+    </ClCompile>
+    <ClCompile Include="lexer_analyzer.cpp">
+      <Filter>Header Files\lexer_analyzer</Filter>
+    </ClCompile>
+    <ClCompile Include="Class_numeric_literal.cpp">
+      <Filter>Header Files\syntax_analyzer\Class_numeric_literal</Filter>
+    </ClCompile>
+    <ClCompile Include="Class_binary_expression.cpp">
+      <Filter>Header Files\syntax_analyzer\Class_binary_expression</Filter>
+    </ClCompile>
+    <ClCompile Include="Class_boolean_expression.cpp">
+      <Filter>Header Files\syntax_analyzer\Class_boolean_expression</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -27,7 +66,31 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="syntax_analyzer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\syntax_analyzer</Filter>
+    </ClInclude>
+    <ClInclude Include="lexer_analyzer.h">
+      <Filter>Header Files\lexer_analyzer</Filter>
+    </ClInclude>
+    <ClInclude Include="Class_syntax_tree.h">
+      <Filter>Header Files\syntax_analyzer\Class_syntax_tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Class_AST.h">
+      <Filter>Header Files\syntax_analyzer\Class_AST</Filter>
+    </ClInclude>
+    <ClInclude Include="Class_visitor.h">
+      <Filter>Header Files\syntax_analyzer\Class_visitor</Filter>
+    </ClInclude>
+    <ClInclude Include="Class_binary_expression.h">
+      <Filter>Header Files\syntax_analyzer\Class_binary_expression</Filter>
+    </ClInclude>
+    <ClInclude Include="Class_expression.h">
+      <Filter>Header Files\syntax_analyzer\Class_expression</Filter>
+    </ClInclude>
+    <ClInclude Include="Class_numeric_literal.h">
+      <Filter>Header Files\syntax_analyzer\Class_numeric_literal</Filter>
+    </ClInclude>
+    <ClInclude Include="Class_boolean_expression.h">
+      <Filter>Header Files\syntax_analyzer\Class_boolean_expression</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
