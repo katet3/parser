@@ -1,21 +1,24 @@
-﻿#pragma once
+﻿#include "Class_AST.h"
+#include "Class_expression.h"
+#include "Class_numeric_node.h"
+#include "Class_boolean_expression.h"
 
-#include "Class_AST.h"
-// Класс синтаксического дерева
-class SyntaxTree {
+#ifndef SYNTAX_TREE_H
+#define SYNTAX_TREE_H
+
+class Syntax_tree {
 private:
     std::unique_ptr<Ast_node> root; // корневой узел дерева
 
 public:
-    // Задает корневой узел дерева
-    void setRoot(std::unique_ptr<Ast_node> node) { root = std::move(node); }
+    Syntax_tree();
+    ~Syntax_tree();
 
-    Ast_node* getRoot() const { return root.get(); }
+    void setRoot(std::unique_ptr<Ast_node> node);
+    Ast_node* getRoot() const;
 
-    // Функция для выполнения дерева (может использовать visitor для выполнения)
-    void execute() {
-        if (root) {
-            // Здесь может быть код для обработки дерева, например, обход с помощью Visitor
-        }
-    }
+    void make_tree(std::vector<Token> tokens);
+    void execute();
 };
+
+#endif // !SYNTAX_TREE_H

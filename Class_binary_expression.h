@@ -1,12 +1,9 @@
-﻿#pragma once
-
-#ifndef BINARY_EXPRESSION_NODE_H
-#define BINARY_EXPRESSION_NODE_H
-
-#include "Class_expression.h"
+﻿#include "Class_expression.h"
 #include "Class_visitor.h"
-#include <memory>
-#include <stdexcept>
+
+
+#ifndef BINARY_EXPRESSION_H
+#define BINARY_EXPRESSION_H
 
 class Binary_expression_node : public Expression_node {
 private:
@@ -22,4 +19,5 @@ public:
     int evaluate();
 };
 
-#endif // BINARY_EXPRESSION_NODE_H
+
+#endif // !BINARY_EXPRESSION_H

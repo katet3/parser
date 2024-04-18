@@ -1,10 +1,8 @@
-﻿#pragma once
-
-#include "Class_expression.h"
+﻿#include "Class_expression.h"
 #include "Class_visitor.h"
-#include <memory>
-#include <stdexcept>
-#include <string>
+
+#ifndef BOOLEAN_EXPRESSION_H
+#define BOOLEAN_EXPRESSION_H
 
 class Boolean_expression_node : public Expression_node {
 private:
@@ -19,3 +17,5 @@ public:
     void accept(Visitor& v) override;
     bool evaluate();
 };
+
+#endif // !BOOLEAN_EXPRESSION_H
