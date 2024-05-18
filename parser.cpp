@@ -56,12 +56,17 @@ static double NumVal;
 static std::string StringVal;
 static bool BoolVal;
 static std::istream* InputStream = &std::cin;
+static int CurrentLine = 1;
 
 static int gettok() {
     static int LastChar = ' ';
 
-    while (isspace(LastChar))
+    while (isspace(LastChar)) {
+        if (LastChar == '\n') {
+            ++CurrentLine;
+        }
         LastChar = InputStream->get();
+    }
 
     if (LastChar == '#') {
         // Comment until end of line.
@@ -345,7 +350,7 @@ public:
 class VariableAssignmentExprAST : public ExprAST {
     std::string Name;
     std::unique_ptr<ExprAST> Expr;
-    std::unique_ptr<ExprAST> Index; // Добавлено для поддержки массивов
+    std::unique_ptr<ExprAST> Index; // Added for array support
 
 public:
     VariableAssignmentExprAST(const std::string& name, std::unique_ptr<ExprAST> expr, std::unique_ptr<ExprAST> index = nullptr)
@@ -436,6 +441,7 @@ double VariableExprAST::evaluate() const {
         return NamedValues[Name].Value;
     }
     std::cerr << "Unknown variable name: " << Name << std::endl;
+    exit(1);  // Terminate execution on error
     return 0.0;
 }
 
@@ -445,28 +451,32 @@ double ArrayExprAST::evaluate() const {
             int index = static_cast<int>(Index->evaluate());
             if (index < 0 || index >= static_cast<int>(NamedValues[Name].ArrayValues.size())) {
                 std::cerr << "Array index out of bounds: " << index << std::endl;
+                exit(1);  // Terminate execution on error
                 return 0.0;
             }
             return NamedValues[Name].ArrayValues[index];
         }
     }
     std::cerr << "Unknown array name: " << Name << std::endl;
+    exit(1);  // Terminate execution on error
     return 0.0;
 }
 
 double VariableAssignmentExprAST::evaluate() const {
     double Val = Expr->evaluate();
-    if (Index) { // Проверка наличия индекса (т.е. это массив)
+    if (Index) { // Check for index (i.e., it's an array)
         if (NamedValues.find(Name) != NamedValues.end() && NamedValues[Name].Type == VarType::ARRAY) {
             int index = static_cast<int>(Index->evaluate());
             if (index < 0 || index >= static_cast<int>(NamedValues[Name].ArrayValues.size())) {
                 std::cerr << "Array index out of bounds: " << index << std::endl;
+                exit(1);  // Terminate execution on error
                 return 0.0;
             }
             NamedValues[Name].ArrayValues[index] = Val;
         }
         else {
             std::cerr << "Unknown array name: " << Name << std::endl;
+            exit(1);  // Terminate execution on error
         }
     }
     else {
@@ -475,6 +485,7 @@ double VariableAssignmentExprAST::evaluate() const {
         }
         else {
             std::cerr << "Unknown variable name: " << Name << std::endl;
+            exit(1);  // Terminate execution on error
         }
     }
     return Val;
@@ -482,7 +493,13 @@ double VariableAssignmentExprAST::evaluate() const {
 
 double VariableDeclarationExprAST::evaluate() const {
     double Val = Expr->evaluate();
-    NamedValues[Name] = { VarType::DOUBLE, Val, "" }; // Default to double for now
+    VarType type = VarType::DOUBLE; // Default to double for now
+    if (NamedValues.find(Name) != NamedValues.end()) {
+        type = NamedValues[Name].Type;
+    } else if (IdentifierStr == "bool") {
+        type = VarType::BOOL;
+    }
+    NamedValues[Name] = { type, Val, "" };
     return Val;
 }
 
@@ -499,6 +516,7 @@ double InputExprAST::evaluate() const {
         return Val;
     }
     std::cerr << "Unknown variable name: " << Name << std::endl;
+    exit(1);  // Terminate execution on error
     return 0.0;
 }
 
@@ -510,7 +528,6 @@ static int CurTok;
 
 static int getNextToken() {
     CurTok = gettok();
-    std::cout << "Got token: " << CurTok << std::endl;  // Отладочный вывод
     return CurTok;
 }
 
@@ -866,24 +883,43 @@ static std::unique_ptr<ExprAST> ParseIntDecl() {
     return std::make_unique<VariableDeclarationExprAST>(IdName, std::move(Expr));
 }
 
+static std::unique_ptr<ExprAST> ParseBoolDecl() {
+    getNextToken(); // eat 'bool'
+
+    if (CurTok != tok_identifier) {
+        std::cerr << "Expected identifier after 'bool'" << std::endl;
+        return nullptr;
+    }
+
+    std::string IdName = IdentifierStr;
+    getNextToken(); // eat identifier
+
+    if (CurTok != tok_assign) {
+        std::cerr << "Expected '=' after identifier" << std::endl;
+        return nullptr;
+    }
+    getNextToken(); // eat '='
+
+    auto Expr = ParseExpression();
+    if (!Expr)
+        return nullptr;
+
+    return std::make_unique<VariableDeclarationExprAST>(IdName, std::move(Expr));
+}
+
 //===----------------------------------------------------------------------===//
 // Main function
 //===----------------------------------------------------------------------===//
 
-int main(int argc, char** argv) {
-    if (argc > 2 && std::string(argv[1]) == "-f") {
-        std::ifstream file(argv[2]);
-        if (!file) {
-            std::cerr << "Could not open file: " << argv[2] << std::endl;
-            return 1;
-        }
-        InputStream = &file;
+void handleFile(const char* filename) {
+    std::ifstream file(filename);
+    if (!file) {
+        std::cerr << "Could not open file: " << filename << std::endl;
+        return;
     }
+    InputStream = &file;
 
     while (true) {
-        if (InputStream == &std::cin) {
-            std::cout << "Enter an expression: ";
-        }
         getNextToken();
 
         if (CurTok == tok_eof) {
@@ -897,6 +933,47 @@ int main(int argc, char** argv) {
         if (CurTok == tok_int) {
             AST = ParseIntDecl();
         }
+        else if (CurTok == tok_bool) {
+            AST = ParseBoolDecl();
+        }
+        else {
+            AST = ParseExpression();
+        }
+
+        if (AST) {
+            AST->evaluate();
+        }
+        else {
+            std::cerr << "Error at line " << CurrentLine << ": Error parsing expression." << std::endl;
+            return;  // Terminate execution on error
+        }
+
+        if (CurTok != tok_semi) {
+            std::cerr << "Error at line " << CurrentLine << ": Expected ';' at the end of the expression." << std::endl;
+            return;  // Terminate execution on error
+        }
+    }
+}
+
+void handleInteractive() {
+    while (true) {
+        std::cout << "Enter an expression: ";
+        getNextToken();
+
+        if (CurTok == tok_eof) {
+            break;
+        }
+        else if (CurTok == tok_semi) {
+            continue;
+        }
+
+        std::unique_ptr<ExprAST> AST;
+        if (CurTok == tok_int) {
+            AST = ParseIntDecl();
+        }
+        else if (CurTok == tok_bool) {
+            AST = ParseBoolDecl();
+        }
         else {
             AST = ParseExpression();
         }
@@ -906,19 +983,22 @@ int main(int argc, char** argv) {
         }
         else {
             std::cerr << "Error parsing expression." << std::endl;
-            getNextToken(); // Пропустить токен после ошибки
+            return;  // Terminate execution on error
         }
 
         if (CurTok != tok_semi) {
             std::cerr << "Expected ';' at the end of the expression." << std::endl;
-            while (CurTok != tok_semi && CurTok != tok_eof) {
-                getNextToken();
-            }
+            return;  // Terminate execution on error
         }
+    }
+}
 
-        if (InputStream != &std::cin && CurTok == tok_eof) {
-            break;
-        }
+int main(int argc, char** argv) {
+    if (argc > 2 && std::string(argv[1]) == "-f") {
+        handleFile(argv[2]);
+    }
+    else {
+        handleInteractive();
     }
 
     return 0;

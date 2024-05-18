@@ -127,7 +127,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lib\lexer\lexer.cpp" />
     <ClCompile Include="parser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\lexer\lexer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
