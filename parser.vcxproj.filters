@@ -5,122 +5,14 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer">
-      <UniqueIdentifier>{68cb4dc8-e07a-4f80-af76-845953d8857d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\lexer_analyzer">
-      <UniqueIdentifier>{f754afb2-a7f7-49d5-9649-0cb91bf3ccab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_syntax_tree">
-      <UniqueIdentifier>{5560062b-8e1a-4971-90bd-128747240ad0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_AST">
-      <UniqueIdentifier>{8e0794a0-f726-41d8-a1f7-d8d925218272}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_visitor">
-      <UniqueIdentifier>{027e5a04-f670-464d-98d8-cc1744ad9e1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_binary_expression">
-      <UniqueIdentifier>{7c4519c5-eedd-4553-b81c-7df9a49fe9df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_expression">
-      <UniqueIdentifier>{1049d096-f10f-49e8-92bb-00aa86041679}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_boolean_expression">
-      <UniqueIdentifier>{2204d0e4-fb41-4bdd-8dc2-2a2c1a4037e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_varible_node">
-      <UniqueIdentifier>{84360cf3-f8f0-4bbe-84b4-bd071111e612}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_string_node">
-      <UniqueIdentifier>{9d00253e-55b5-4839-8c15-099556a989db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_numeric_node">
-      <UniqueIdentifier>{027eb542-b5a6-41c2-baa2-a290b1fab7b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\syntax_analyzer\Class_internal_function_node">
-      <UniqueIdentifier>{f0de9936-9d74-4d6d-a31b-5c2038799530}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="syntax_analyzer.cpp">
-      <Filter>Header Files\syntax_analyzer</Filter>
-    </ClCompile>
-    <ClCompile Include="lexer_analyzer.cpp">
-      <Filter>Header Files\lexer_analyzer</Filter>
-    </ClCompile>
-    <ClCompile Include="Class_numeric_node.cpp">
-      <Filter>Header Files\syntax_analyzer\Class_numeric_node</Filter>
-    </ClCompile>
-    <ClCompile Include="Class_binary_expression.cpp">
-      <Filter>Header Files\syntax_analyzer\Class_binary_expression</Filter>
-    </ClCompile>
-    <ClCompile Include="Class_boolean_expression.cpp">
-      <Filter>Header Files\syntax_analyzer\Class_boolean_expression</Filter>
-    </ClCompile>
-    <ClCompile Include="Class_syntax_tree.cpp">
-      <Filter>Header Files\syntax_analyzer\Class_syntax_tree</Filter>
-    </ClCompile>
-    <ClCompile Include="Class_varible_node.cpp">
-      <Filter>Header Files\syntax_analyzer\Class_varible_node</Filter>
-    </ClCompile>
-    <ClCompile Include="Class_string_node.cpp">
-      <Filter>Header Files\syntax_analyzer\Class_string_node</Filter>
-    </ClCompile>
-    <ClCompile Include="Class_internal_function_node.cpp">
-      <Filter>Header Files\syntax_analyzer\Class_internal_function_node</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="structures.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="syntax_analyzer.h">
-      <Filter>Header Files\syntax_analyzer</Filter>
-    </ClInclude>
-    <ClInclude Include="lexer_analyzer.h">
-      <Filter>Header Files\lexer_analyzer</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_syntax_tree.h">
-      <Filter>Header Files\syntax_analyzer\Class_syntax_tree</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_AST.h">
-      <Filter>Header Files\syntax_analyzer\Class_AST</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_visitor.h">
-      <Filter>Header Files\syntax_analyzer\Class_visitor</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_binary_expression.h">
-      <Filter>Header Files\syntax_analyzer\Class_binary_expression</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_expression.h">
-      <Filter>Header Files\syntax_analyzer\Class_expression</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_numeric_node.h">
-      <Filter>Header Files\syntax_analyzer\Class_numeric_node</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_boolean_expression.h">
-      <Filter>Header Files\syntax_analyzer\Class_boolean_expression</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_varible_node.h">
-      <Filter>Header Files\syntax_analyzer\Class_varible_node</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_string_node.h">
-      <Filter>Header Files\syntax_analyzer\Class_string_node</Filter>
-    </ClInclude>
-    <ClInclude Include="Class_internal_function_node.h">
-      <Filter>Header Files\syntax_analyzer\Class_internal_function_node</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

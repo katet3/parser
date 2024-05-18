@@ -128,30 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="parser.cpp" />
-    <ClCompile Include="lexer_analyzer.cpp" />
-    <ClCompile Include="Class_numeric_node.cpp" />
-    <ClCompile Include="Class_binary_expression.cpp" />
-    <ClCompile Include="Class_boolean_expression.cpp" />
-    <ClCompile Include="Class_syntax_tree.cpp" />
-    <ClCompile Include="Class_varible_node.cpp" />
-    <ClCompile Include="Class_string_node.cpp" />
-    <ClCompile Include="Class_internal_function_node.cpp" />
-    <ClCompile Include="syntax_analyzer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Class_syntax_tree.h" />
-    <ClInclude Include="Class_AST.h" />
-    <ClInclude Include="Class_visitor.h" />
-    <ClInclude Include="Class_binary_expression.h" />
-    <ClInclude Include="Class_expression.h" />
-    <ClInclude Include="Class_numeric_node.h" />
-    <ClInclude Include="Class_boolean_expression.h" />
-    <ClInclude Include="Class_varible_node.h" />
-    <ClInclude Include="Class_string_node.h" />
-    <ClInclude Include="Class_internal_function_node.h" />
-    <ClInclude Include="lexer_analyzer.h" />
-    <ClInclude Include="syntax_analyzer.h" />
-    <ClInclude Include="structures.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
